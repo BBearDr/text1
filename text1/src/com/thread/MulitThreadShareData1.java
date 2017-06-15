@@ -1,3 +1,4 @@
+package com.thread;
 
 public class MulitThreadShareData1 {
 	

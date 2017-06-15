@@ -1,4 +1,10 @@
-public class demo3 {
+/**
+ * Decription:递归，将三个字符颠倒顺序后输出
+ * Author:cjx
+ * Date: 2017/6/15 9:17
+ * param:  * @param null
+ */
+public class RecursionDemo {
     public static void main(String[] args)
     {
         //使用递归完成全排列

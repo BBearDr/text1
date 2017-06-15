@@ -1,3 +1,5 @@
+package com.thread;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,7 +8,7 @@ import java.util.TimerTask;
 
 
 
-public class demo1222 {
+public class TimerTaskDemo {
 	private static int count = 0;
 	public static void main(String[] args) {
 		class MyTimerTask extends TimerTask{

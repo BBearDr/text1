@@ -1,3 +1,5 @@
+package com.thread;
+
 import java.util.Arrays;
 
 
@@ -17,7 +19,7 @@ public class Thread2 implements Runnable {
 	public void run() {
 		int count  = 5;
 		while(count > 0){
-			System.out.println("µÚ"+count+"´Î");
+			System.out.println("ï¿½ï¿½"+count+"ï¿½ï¿½");
 			synchronized (prev) {//c,a,b
 				synchronized (self) {//a,b,c
 					System.out.println(name);
