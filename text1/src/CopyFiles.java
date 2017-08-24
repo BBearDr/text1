@@ -13,7 +13,7 @@ public class CopyFiles {
     public static void main(String args[]) throws IOException {
         String fileType = "file";//file--文件,directory--文件夹
         // 源文件夹
-        String sourceFilePath = "D:/workspaceIntelliJ/pension_ocpt/";
+        String sourceFilePath = "D:/workspaceIntelliJ/pension_sec2/";
         // 仅复制配置的文件
         String copyFilesPath_txt = "D:/FileDocumentary/FileName.txt";
         // 目标文件夹

@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import com.sun.rowset.internal.CachedRowSetWriter;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellValue;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 
@@ -34,6 +33,8 @@ public class ReadExcelPerson {
     HSSFWorkbook workbook = null;
     // 设置Cell之间以空格分割
     private static String EXCEL_LINE_DELIMITER = ",";
+    //处理公式
+    HSSFFormulaEvaluator evaluator;
 
     // 构造函数创建一个ExcelReader
     public ReadExcelPerson(String inputfile) throws IOException, Exception {
@@ -86,6 +87,7 @@ public class ReadExcelPerson {
                         }
                         //循环cell
                         List<String> cell = new ArrayList<String>();
+                        cell.add(String.valueOf(rowNum));
                         //获得本行中单元格的个数
                         for (short cellNum = 0; cellNum < hssfRow.getLastCellNum(); cellNum++) {
                             HSSFCell hssfCell = hssfRow.getCell(cellNum);
@@ -94,13 +96,13 @@ public class ReadExcelPerson {
                             }
                             cell.add(getValue(hssfCell));
                         }
-                        if (!cell.isEmpty()) {
-                            if (cell.get(0).indexOf("请在提交该表前仔细阅读填表说明") != -1) {
+                        if (!cell.isEmpty() && cell.size() >=2) {
+                            if (cell.get(1).contains("合计") || cell.get(1).contains("打印日期")) {
                                 break;
                             }
-                            System.out.println(cell);
-                            row.add(cell);
                         }
+                        System.out.println(cell);
+                        row.add(cell);
                     }
                 }
             }
@@ -193,6 +195,9 @@ public class ReadExcelPerson {
                 case HSSFCell.CELL_TYPE_STRING:
                     // 取得当前的Cell字符串
                     cellvalue = cell.getStringCellValue().replaceAll("'", "''");
+                    break;
+                case HSSFCell.CELL_TYPE_FORMULA:
+                    cellvalue = String.valueOf(cell.getNumericCellValue());
                     break;
                 // 默认的Cell值
                 default:
@@ -333,7 +338,7 @@ public class ReadExcelPerson {
     // 测试case
     public static void main(String[] args) {
         try {
-            ReadExcelPerson er = new ReadExcelPerson("D://需求文档//待遇支付人员管理//缴费清单明细-带公共账户缴费的.xls");
+            ReadExcelPerson er = new ReadExcelPerson("D://需求文档//待遇支付人员管理//缴费清单（汇总表）_南京金城塑胶有限公司企业计划.xls");
             List<List<String>> row = er.readExcel();
             //得到excel数据后，写处理数据的代码就可以了，如：插入数据库等等
 //            System.out.println(row);

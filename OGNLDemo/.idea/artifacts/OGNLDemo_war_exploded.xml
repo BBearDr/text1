@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="OGNLDemo:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/OGNLDemo_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="OGNLDemo/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="OGNLDemo" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/xwork-core.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/struts2-core.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/ognl.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/javassist.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/freemarker.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-lang.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-io.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-fileupload.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/asm.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/asm-tree.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/asm-commons.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

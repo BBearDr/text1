@@ -31,6 +31,7 @@ public class PubExcleUtil {
 		Sheet sheet = wb.createSheet();
 		wb.setSheetName(sheetNum, "工作表"+sheetNum);
 		sheet.setDefaultColumnWidth((short) 14);
+		sheet.setColumnHidden(1,true);
 	}
 	/**
 	 * 新建标题，样式
@@ -218,6 +219,7 @@ public class PubExcleUtil {
 			int j = 0;// 列
 			int num = (rowNum>65000)?65000:rowNum;
 			sheet = wb.createSheet();
+			sheet.setColumnHidden(1,true);
 			ExcelTitle(wb, sheet, i, j, title1, strCol);//写标题
 			i++;
 			ExcelCol(wb, sheet, i, j, strCol);//写列名
@@ -265,7 +267,7 @@ public class PubExcleUtil {
 		String[] strCol = {"丽人1","丽人2","丽人3","丽人4","丽人5","丽人6"};
 		String[] str = { "12", "23333333333333333333", "33", "44", "22","11111111111111111111111" };
 		String title1 = "工作表";
-		int rowNum = 120000;
+		int rowNum = 120;
 		String fileType = "xls";
 		PubExcleUtil excel = new PubExcleUtil();
 		boolean reasult = excel.excelUtil(strCol, str, title1, rowNum, fileType);
