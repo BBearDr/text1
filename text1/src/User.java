@@ -16,6 +16,9 @@ public class User {
         this.name = name;
         this.password = password;
     }
+    public boolean User(){
+        return true;
+    }
 
     public String getName() {
         return name;

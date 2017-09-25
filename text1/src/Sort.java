@@ -10,19 +10,14 @@ import java.util.List;
  */
 public class Sort {
 	public static void main(String[] args) {
-		int[] a = {3,10,5,7,2,4,9,6};
-		Sort s = new Sort();
-		s.QuickSort(a,0,a.length-1);
+		int[] a = {11,3,10,5,7,2,4,9,6};
+/*		Sort s = new Sort();
+		s.QuickSort(a,0,a.length-1);*/
+        ShellSort shellSort = new ShellSort();
+        shellSort.ShellInsertSort(a);
 	}
-	/**
-	 * Title: exchange
-	 * Description: 该方法是交换另个数字的位置
-	 * author: chenjx
-	 * param 数组
-	 * param 第一个数字
-	 * param 第二个数字
-	 */
 	private void exchange(int[] A,int a,int b){
+
 		int temp = A[a];
 		A[a] = A[b];
 		A[b] = temp;
@@ -87,6 +82,7 @@ public class Sort {
 	/**
 	 * 插入排序1--普通(直接)插入，扑克插牌，
 	 * 将要插入的牌与已排序的牌进行对比，符合插入位置上的牌依次向后挪，是稳定的
+     * 时间复杂度：O（n^2）
 	 */
 	void InsertSort3(int[] list){
 		for(int i=1;i<list.length;i++){
@@ -99,14 +95,6 @@ public class Sort {
 			list[j+1] =  a;
 			System.out.println(Arrays.toString(list));
 		}
-	}
-
-	/**
-	 * 插入排序2--希尔排序
-	 * 就是多次的直接排序，根据增量将数组拆分成多个序列
-	 */
-	void InsertSort4(int[] list){
-
 	}
 	/**
 	 * Decription:Sort 快速排序：挖坑排序+分治法，依次对左右两边的数字进行排序
@@ -136,4 +124,28 @@ public class Sort {
 		}
 		System.out.println(Arrays.toString(list));
 	}
+}
+/**
+ * 插入排序2--希尔排序
+ * 将一数组等分成多份,然后将每一份的头尾进行比较交换,循环进行,下一次进行时,
+ * 将原来的等分量进行缩减,直至只剩下长度为1时,结束
+ */
+class ShellSort{
+    void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+     void ShellInsertSort(int[] arr) {
+         for (int gap = arr.length / 2; gap > 0; gap /= 2) {
+             for (int i = gap; i < arr.length; i++) {
+                 int j = i;
+                 while (j - gap >= 0 && arr[j] < arr[j - gap]) {
+                        swap(arr,j,j-gap);
+                        j-=gap;
+                 }
+                 System.out.println(Arrays.toString(arr));
+             }
+         }
+    }
 }

@@ -116,8 +116,11 @@
 				<a id="matrixVarMultiple" class="textLink" href="<c:url value="/data/matrixvars;foo=bar1/multiple;foo=bar2" />">Matrix variables (multiple)</a>
 			</li>
 			<li>
-				<a id="header" class="textLink" href="<c:url value="/data/header" />">Header</a>
+				<a id="cookie" class="textLink" href="<c:url value="/data/cookie" />">Cookie</a>
 			</li>
+            <li>
+                <a id="header" class="textLink" href="<c:url value="/data/header" />">Header</a>
+            </li>
 			<li>
 				<form id="requestBody" class="textForm" action="<c:url value="/data/body" />" method="post">
 					<input id="requestBodySubmit" type="submit" value="Request Body" />
@@ -579,7 +582,8 @@ $(document).ready(function() {
 
 	$("a.writeXmlLink").click(function() {
 		var link = $(this);
-		$.ajax({ url: link.attr("href"),
+		$.ajax({
+		    url: link.attr("href"),
 			beforeSend: function(req) { 
 				if (!this.url.match(/\.xml$/)) {
 					req.setRequestHeader("Accept", "application/xml");
@@ -596,24 +600,28 @@ $(document).ready(function() {
 	});					
 
 	$("form.readJsonForm").submit(function() {
+	    console.log(603);
 		var form = $(this);
 		var button = form.children(":first");
 		var data = form.hasClass("invalid") ?
 				"{ \"foo\": \"bar\" }" : 
 				"{ \"foo\": \"bar\", \"fruit\": \"apple\" }";
+		console.data(data);
 		$.ajax({
 		    type: "POST",
             url: form.attr("action"),
             data: data,
             contentType: "application/json",
-            dataType: "text", success: function(text) { MvcUtil.showSuccessResponse(text, button); },
+            dataType: "text",
+            success: function(text) { MvcUtil.showSuccessResponse(text, button); },
             error: function(xhr) { MvcUtil.showErrorResponse(xhr.responseText, button); }});
 		return false;
 	});
 
 	$("a.writeJsonLink").click(function() {
 		var link = $(this);
-		$.ajax({ url: this.href,
+		$.ajax({
+		    url: this.href,
 			beforeSend: function(req) {
 				if (!this.url.match(/\.json$/)) {
 					req.setRequestHeader("Accept", "application/json");
@@ -644,7 +652,8 @@ $(document).ready(function() {
 
 	$("#writeAtom").click(function() {
 		var link = $(this);
-		$.ajax({ url: link.attr("href"),
+		$.ajax({
+		    url: link.attr("href"),
 			beforeSend: function(req) { 
 				req.setRequestHeader("Accept", "application/atom+xml");
 			},

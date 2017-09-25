@@ -22,9 +22,8 @@ public class Product implements Runnable {
 
     @Override
     public void run() {
-        while(i<=5) {
+        while(true) {
             produce();
-            i++;
         }
     }
     private void produce() {

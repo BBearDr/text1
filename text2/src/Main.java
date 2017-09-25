@@ -12,8 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        String sourceFile = "D:\\增加投资组合的说明.doc";
-        String destFile = "D:\\增加投资组合的说明.pdf";
+        String sourceFile = "E:\\BaiduNetdiskDownload\\赵娜简历.pdf";
+        String destFile = "E:\\BaiduNetdiskDownload\\赵娜简历.docx";
         office2PDF(sourceFile,destFile);
     }
     public static int office2PDF(String sourceFile, String destFile) {

@@ -35,7 +35,7 @@ public class RequestDataController {
 	public @ResponseBody String withMatrixVariable(@PathVariable String path, @MatrixVariable String foo) {
 		return "Obtained matrix variable 'foo=" + foo + "' from path segment '" + path + "'";
 	}
-
+    //  data/matrixvars;foo=bar1/multiple;foo=bar2
 	@RequestMapping(value="{path1}/{path2}", method=RequestMethod.GET)
 	public @ResponseBody String withMatrixVariablesMultiple (
 			@PathVariable String path1, @MatrixVariable(value="foo", pathVar="path1") String foo1,
@@ -51,7 +51,7 @@ public class RequestDataController {
 	}
 
 	@RequestMapping(value="cookie", method=RequestMethod.GET)
-	public @ResponseBody String withCookie(@CookieValue String openid_provider) {
+	public @ResponseBody String withCookie(@CookieValue("JSESSIONID") String openid_provider) {
 		return "Obtained 'openid_provider' cookie '" + openid_provider + "'";
 	}
 

@@ -1,7 +1,11 @@
 import junit.framework.Test;
+import org.apache.poi.hssf.record.ObjRecord;
+import org.apache.poi.hwpf.sprm.SprmUtils;
 
 import javax.sound.midi.Soundbank;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.locks.Condition;
@@ -12,10 +16,35 @@ import java.util.concurrent.locks.Condition;
  * Author:cjx
  */
 public class TestDemo {
-    public static void main(String[] args) {
-        TestDemo testDemo = new TestDemo();
-        String str = testDemo.getNumber("aBcD234");
-        System.out.println(str.toString());
+    public static void main(String[] args) throws Exception {
+        User user = new User();
+      /*  int modifiers = User.class.getModifiers();
+        String s = Modifier.toString(modifiers);*/
+        /*Field[] fields = User.class.getFields();
+        for(Field field : fields) {
+            String o = (String)field.get(user);
+            System.out.println(o);
+        }*/
+//        Class<?> user1 = Class.forName("User");
+        Class clasz = user.getClass();
+        Field name = clasz.getDeclaredField("name");
+        name.setAccessible(true);
+        name.set(name,"CK");
+        System.out.println(user.getName());
+
+    }
+    private void test1() {
+        String s1 = "Programming";
+        String s2 = new String("Programming");
+        String s3 = "Program";
+        String s4 = "ming";
+        String s5 = "Program" + "ming";
+        String s6 = s3 + s4;
+        System.out.println(s1 == s2);
+        System.out.println(s1 == s5);
+        System.out.println(s1 == s6);
+        System.out.println(s1 == s6.intern());
+        System.out.println(s2 == s2.intern());
     }
     private String getNumber(String str) {
         String num = str.replaceAll("[a-z|A-Z]","");

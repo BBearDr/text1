@@ -9,7 +9,7 @@ public class CopyFileNew {
 
     public static void main(String[] args) {
         //项目名称123
-        String workName = "D:/workspaceIntelliJ/pension_sec2/";
+        String workName = "D:/workspaceIntelliJ/pension_sec3/";
         //文件存储txt路径
         String dealTxtPath = "D:/FileDocumentary/FileName.txt";
         //复制文件及文件结构存储的目标路径
@@ -17,7 +17,7 @@ public class CopyFileNew {
         //仅复制文件
         String fileToWPath = "D:/FileDocumentary/fileCopy/";
         //复制文件类型 Documentary--文件目录，file--文件
-        String copyWay = "file";
+        String copyWay = "Doc";
         //编码格式
         String encoding = "GBK";
         try {

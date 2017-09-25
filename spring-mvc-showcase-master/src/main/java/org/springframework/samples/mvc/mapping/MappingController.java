@@ -36,7 +36,7 @@ public class MappingController {
 	public @ResponseBody String byParameterNegation() {
 		return "Mapped by path + method + not presence of query parameter!";
 	}
-
+    //获得表头中的参数
 	@RequestMapping(value="/mapping/header", method=RequestMethod.GET, headers="FooHeader=foo")
 	public @ResponseBody String byHeader(HttpServletRequest request) {
 		return "Mapped by path + method + presence of header!" +"-->" + request.getHeader("FooHeader");
@@ -51,12 +51,12 @@ public class MappingController {
 	public @ResponseBody String byConsumes(@RequestBody JavaBean javaBean) {
 		return "Mapped by path + method + consumable media type (javaBean '" + javaBean + "')";
 	}
-
+    //produces 根据表头中的Content-type进行相对应的显示Json
 	@RequestMapping(value="/mapping/produces", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody JavaBean byProducesJson() {
 		return new JavaBean();
 	}
-
+    //XML
 	@RequestMapping(value="/mapping/produces", method=RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
 	public @ResponseBody JavaBean byProducesXml() {
 		return new JavaBean();

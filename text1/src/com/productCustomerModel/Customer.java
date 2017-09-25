@@ -1,7 +1,11 @@
 package com.productCustomerModel;
 
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
- * Description:
+ * Description:消费者
  * Date:2017/8/29 13:49
  * Author:cjx
  */
@@ -19,12 +23,11 @@ public class Customer implements Runnable {
     }
     @Override
     public void run() {
-        while (i<=5) {
+        while (true) {
             consume();
-            i++;
         }
     }
-    public void consume() {
+   /* public void consume() {
         if (container.isEmpty()) {
             //唤醒生产者
             synchronized (producerMonitor) {
@@ -49,5 +52,32 @@ public class Customer implements Runnable {
             String back = container.get();
             System.out.println("consume:"+back + ",thread:" +Thread.currentThread().getName());
         }
-    }
+    }*/
+   public void consume() {
+       Lock lock = new ReentrantLock();
+       if (container.isEmpty()) {
+           //唤醒生产者
+                lock.lock();
+               if (container.isEmpty()) {
+                   System.out.println("cu--"+32);
+                   producerMonitor.notify();
+                   System.out.println("cu--"+34);
+               }
+               lock.unlock();
+           //挂起消费者
+          lock.lock();
+               try {
+                   if (container.isEmpty()) {
+                       System.out.println("挂起消费者....");
+                       customerMonitor.wait();
+                   }
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+           lock.unlock();
+       }else {
+           String back = container.get();
+           System.out.println("consume:"+back + ",thread:" +Thread.currentThread().getName());
+       }
+   }
 }
